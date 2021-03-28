@@ -1,20 +1,21 @@
 package cz.educanet.arena.logic;
 
+import java.util.Random;
+
 public class Gladiator {
     /**
-     * Name of the gladiator
+     * Name, health, minimal damage and maximal damage of the gladiator
      */
     private String name;
-
-    // TODO: Add the rest of the properties
-    // TODO: Generate/create getters and setters for these properties
+    private int HP;
+    private int minDamage;
+    private int maxDamage;
 
     /**
      * @return true if hp is <= 0, else false
      */
     public boolean isDead() {
-        // TODO:
-        throw new UnsupportedOperationException();
+        return (getHP() <= 0);
     }
 
     /**
@@ -22,9 +23,16 @@ public class Gladiator {
      * @param enemy Enemy gladiator
      */
     public void dealDamage(Gladiator enemy) {
-        // TODO:
-        // Generate the random value, that the gladiator will deal.
+        Random rd = new Random();
+        int damage = (rd.nextInt((getMaxDamage() - getMinDamage()) + 1) + getMinDamage());
+        enemy.setHP(enemy.getHP() - damage);
     }
+
+
+    /**
+     * getter and setter for name
+     * @return
+     */
 
     public String getName() {
         return name;
@@ -32,5 +40,44 @@ public class Gladiator {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * getter and setter for HP
+     * @return
+     */
+
+    public int getHP() {
+        return HP;
+    }
+
+    public void setHP(int HP) {
+        this.HP = HP;
+    }
+
+    /**
+     * getter and setter for minimal damage
+     * @param minDamage
+     */
+
+    public void setMinDamage(int minDamage) {
+        this.minDamage = minDamage;
+    }
+
+    public int getMinDamage() {
+        return minDamage;
+    }
+
+    /**
+     * getter and setter for maximal damage
+     * @return
+     */
+
+    public void setMaxDamage(int maxDamage) {
+        this.maxDamage = maxDamage;
+    }
+
+    public int getMaxDamage() {
+        return maxDamage;
     }
 }

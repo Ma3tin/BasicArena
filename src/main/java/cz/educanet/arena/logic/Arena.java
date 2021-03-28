@@ -12,23 +12,43 @@ public class Arena {
      */
     private int round;
 
+
+    public Gladiator getGladiator1() {
+        return gladiator1;
+    }
+
+    public Gladiator getGladiator2() {
+        return gladiator2;
+    }
+
+
+
+    public int getRound() {
+        return round;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
+    }
+
     /**
      * Makes the gladiators fight one round.
      */
     public void fight() {
-        // TODO:
-        // Gladiator 1 should deal (random) damage to Gladiator 2
-        // Gladiator 2 should deal (random) damage to Gladiator 1
-        throw new UnsupportedOperationException();
+        getGladiator1().dealDamage(getGladiator2());
+        getGladiator2().dealDamage(getGladiator1());
     }
 
     /**
      * @return the winner, null if none.
      */
-    public Gladiator getWinner() {
+    public Object getWinner() {
         // TODO:
-        throw new UnsupportedOperationException();
+        if (getGladiator1() != null && getGladiator1().isDead() ) { return getGladiator2().getName(); }
+        if (getGladiator2() != null && getGladiator2().isDead()) { return getGladiator1().getName(); }
+        return null;
     }
+
 
     public void setGladiator1(Gladiator gladiator1) {
         this.gladiator1 = gladiator1;
