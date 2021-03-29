@@ -29,10 +29,12 @@ public class ArenaCLI {
     }
 
     public void renderGladiatorPicker() {
-        System.out.println("Pick your fighter #1 (enter the path of the saved file):");
+        System.out.println("Enter name of your first gladiator");
         String gladiator1File = sc.nextLine();
-        System.out.println("Pick your fighter #2 (enter the path of the saved file):");
+        gladiator1File += ".txt";
+        System.out.println("Enter name of your second gladiator");
         String gladiator2File = sc.nextLine();
+        gladiator2File += ".txt";
 
         Gladiator gladiator1 = GladiatorDatabase.loadGladiator(gladiator1File);
         Gladiator gladiator2 = GladiatorDatabase.loadGladiator(gladiator2File);
@@ -91,13 +93,54 @@ public class ArenaCLI {
         chooseGladiator();
         Gladiator gladiatorA = logic.getGladiator1();
         Gladiator gladiatorB = logic.getGladiator2();
+        int round = 0;
+        logic.setRound(round);
+        float oneHealthBarA = (float) gladiatorA.getHP() / 20;
+        float oneHealthBarB = (float) gladiatorB.getHP() / 20;
+        String healthBarA = "";
+        String healthBarB = "";
         while (logic.getWinner() == null) {
+            float a = gladiatorA.getHP() / oneHealthBarA;
+            float b = gladiatorB.getHP() / oneHealthBarB;
+            round = logic.getRound();
+            round++;
+            logic.setRound(round);
+            int hpA = gladiatorA.getHP();
+            int hpB = gladiatorB.getHP();
+
             logic.fight();
-            System.out.println(gladiatorA.getName() + " " + gladiatorA.getHP());
-            System.out.println(gladiatorB.getName() + " " + gladiatorB.getHP());
-            System.out.println("--------------------");
+
+            System.out.println("-------- " + logic.getRound() + ". kolo ---------");
+            System.out.println();
+            System.out.println("Fighter's health:");
+            for (int i = 0; i < a; i++) healthBarA += "#";
+            for (int i = 0; i < b; i++) healthBarB += "#";
+            System.out.print(gladiatorA.getName() + " [");
+            if (gladiatorA.isDead()) System.out.print("]");
+            else System.out.print(healthBarA + "]");
+            System.out.println();
+            System.out.print(gladiatorB.getName() + " [");
+            if (gladiatorB.isDead()) System.out.print("]");
+            else System.out.println(healthBarB + "]");
+            System.out.println();
+            if (!gladiatorB.isDead()) System.out.println(gladiatorA.getName() + " attack and deal " + (hpB - gladiatorB.getHP()) +
+                    " damage. And " + gladiatorB.getName() + " has " + gladiatorB.getHP() + " health points.");
+
+            else System.out.println(gladiatorA.getName() + " attack and deal " + (hpB - gladiatorB.getHP()) +
+                    " damage. And " + gladiatorB.getName() + " has " + gladiatorB.getHP() + " health points and died.");
+
+            if (!gladiatorA.isDead()) System.out.println(gladiatorB.getName() + " attack and deal " + (hpA - gladiatorA.getHP()) +
+                    " damage. And " + gladiatorA.getName() + " has " + gladiatorA.getHP() + " health points.");
+
+            else System.out.println(gladiatorB.getName() + " attack and deal " + (hpA - gladiatorA.getHP()) +
+                    " damage. And " + gladiatorA.getName() + " has " + gladiatorA.getHP() + " health points and died.");
+
+            System.out.println();
+
+            healthBarA = "";
+            healthBarB = "";
+
         }
         System.out.println(logic.getWinner() + " is winner!!");
     }
-
 }

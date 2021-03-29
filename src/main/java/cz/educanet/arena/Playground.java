@@ -13,8 +13,6 @@ import java.util.Scanner;
 public class Playground {
 
     public static void main(String[] args) {
-        Gladiator gl = new Gladiator();
-        Gladiator jarda = new Gladiator();
         ArenaCLI cl = new ArenaCLI();
         cl.init();
         /*gl.setHP(80);
