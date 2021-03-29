@@ -71,6 +71,9 @@ public class ArenaCLI {
         GladiatorDatabase.saveGladiator(gladiator1.getName() + ".txt", gladiator1);
         GladiatorDatabase.saveGladiator(gladiator2.getName() + ".txt", gladiator2);
 
+        logic.setGladiator1(gladiator1);
+        logic.setGladiator2(gladiator2);
+
     }
 
     public void chooseGladiator() {
